@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="card" class="m-5 p-2">
+    <h5 class="card-title">{{ scores.fldFName }} {{ scores.fldLName }}'s Scores</h5>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">fldFName: {{ score.fldLName }}</li>
+        <li class="list-group-item">fldLName: {{ score.fldFName }}</li>
+        <li class="list-group-item">ssn: {{ score.ssn }}</li>
+        <li class="list-group-item">test1: {{ score.test1 }}</li>
+        <li class="list-group-item">test2: {{ score.test2 }}</li>
+        <li class="list-group-item">test3: {{ score.test3 }}</li>
+        <li class="list-group-item">test4: {{ score.test4 }}</li>
+        <li class="list-group-item">final: {{ score.final }}</li>
+        <li class="list-group-item">grade: {{ score.grade }}</li>
+    </ul>T
+    <div class="card-body">
+        <a href="/edit/{{score.id}}" class="card-link btn btn-primary">edit</a>
+    </div>
+</div>
+<form action="/delete/{{score.id}}" method="post"><button type="submit" class="btn btn-danger">Delete</button></form>
+
+
+{% endblock %}
+
