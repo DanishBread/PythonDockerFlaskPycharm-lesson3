@@ -40,15 +40,14 @@ def form_edit_get(sc_id):
     cursor.execute('SELECT * FROM scoresImport WHERE id=%s', sc_id)
     result = cursor.fetchall()
     print(result[0])
-    return render_template('edit.html', title='Edit Form', scores=result[0])
+    return render_template('edit.html', title='Edit Form', score=result[0])
 
 
 @app.route('/edit/<int:sc_id>', methods=['POST'])
 def form_update_post(sc_id):
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('fldLName'), request.form.get('fldFName'), request.form.get('ssn'),
-                 request.form.get('test1'), request.form.get('test2'), request.form.get('test3'), request.form.get('test4'), request.form.get('final'), request.form.get('grade'),
-                 request.form.get('fldCapitalStatus'), request.form.get('fldPopulation'), sc_id)
+                 request.form.get('test1'), request.form.get('test2'), request.form.get('test3'), request.form.get('test4'), request.form.get('final'), request.form.get('grade'), sc_id)
     sql_update_query = """UPDATE scoresImport t SET t.fldLName = %s, t.fldFName = %s, t.ssn = %s, t.test1 = 
     %s, t.test2 = %s, t.test3 = %s, t.test4 = %s, t.final = %s, t.grade = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
@@ -66,7 +65,7 @@ def form_insert_post():
     inputData = (request.form.get('fldLName'), request.form.get('fldFName'), request.form.get('ssn'),
                  request.form.get('test1'), request.form.get('test2'), request.form.get('test3'), request.form.get('test4'), request.form.get('final'),
                  request.form.get('grade'))
-    sql_insert_query = """INSERT INTO scoresImport (fldLName,fldFName,ssn,test1,test2,test3,test4,final,grade) VALUES (%s, %s,%s, %s,%s, %s,%s,%s, %s,%s) """
+    sql_insert_query = """INSERT INTO scoresImport (fldLName,fldFName,ssn,test1,test2,test3,test4,final,grade) VALUES (%s, %s,%s, %s,%s, %s,%s,%s, %s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
