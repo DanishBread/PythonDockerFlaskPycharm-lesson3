@@ -6,12 +6,12 @@ CREATE TABLE IF NOT EXISTS scoresImport (
     `fldLName` VARCHAR(21) CHARACTER SET utf8,
     `fldFName` VARCHAR(21) CHARACTER SET utf8,
     `ssn` VARCHAR(21) CHARACTER SET utf8,
-    `test1` NUMERIC(3, 2),
-    `test2` NUMERIC(3, 2),
-    `test3` NUMERIC(3, 2),
-    `test4` NUMERIC(3, 2),
-    `final` NUMERIC(3, 2),
-    `grade` VARCHAR(21) CHARACTER SET utf8
+    `test1` float default 0,
+    `test2` float default 0,
+    `test3` float default 0,
+    `test4` float default 0,
+    `final` float default 0,
+    `grade` VARCHAR(21) CHARACTER SET utf8,
 
     PRIMARY KEY (`id`)
 );

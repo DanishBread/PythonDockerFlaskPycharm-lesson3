@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="card" class="m-5 p-2">
-    <h5 class="card-title">{{ scores.fldFName }} {{ scores.fldLName }}'s Scores</h5>
+    <h5 class="card-title">{{ score.fldFName }} {{ score.fldLName }}'s score</h5>
 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">fldFName: {{ score.fldLName }}</li>
@@ -14,7 +14,7 @@
         <li class="list-group-item">test4: {{ score.test4 }}</li>
         <li class="list-group-item">final: {{ score.final }}</li>
         <li class="list-group-item">grade: {{ score.grade }}</li>
-    </ul>T
+    </ul>
     <div class="card-body">
         <a href="/edit/{{score.id}}" class="card-link btn btn-primary">edit</a>
     </div>

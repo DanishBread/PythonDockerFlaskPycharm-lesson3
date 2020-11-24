@@ -22,6 +22,7 @@ def index():
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM scoresImport')
     result = cursor.fetchall()
+    print(result[0])
     return render_template('index.html', title='Home', user=user, scores=result)
 
 
@@ -30,7 +31,7 @@ def record_view(sc_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM scoresImport WHERE id=%s', sc_id)
     result = cursor.fetchall()
-    return render_template('view.html', title='View Form', scores=result[0])
+    return render_template('view.html', title='View Form', score=result[0])
 
 
 @app.route('/edit/<int:sc_id>', methods=['GET'])
@@ -38,6 +39,7 @@ def form_edit_get(sc_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM scoresImport WHERE id=%s', sc_id)
     result = cursor.fetchall()
+    print(result[0])
     return render_template('edit.html', title='Edit Form', scores=result[0])
 
 
