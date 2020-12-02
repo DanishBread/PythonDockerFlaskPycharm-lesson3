@@ -99,16 +99,39 @@ def api_retrieve(sc_id) -> str:
     return resp
 
 
-@app.route('/api/v1/scores/', methods=['POST'])
-def api_add() -> str:
-    resp = Response(status=201, mimetype='application/json')
-    return resp
-
 
 @app.route('/api/v1/scores/<int:sc_id>', methods=['PUT'])
 def api_edit(sc_id) -> str:
+    content = request.json
+    cursor = mysql.get_db().cursor()
+    inputData = (content['fldLname'], content['fldFname'], content['ssn'],
+                 content['test1'], content['test2'], content['test3'], content['test4'],
+                 content['final'], request.form.get('grade'), sc_id)
+    sql_update_query = """UPDATE scoresImport t SET t.fldLName=%s, t.fldFName=%s, t.ssn=%s,
+    t.test1=%s, t.test2=%s, t.test3=%s, t.test4=%s,  t.final=%s,  t.grade=%s WHERE t.id=%s"""
+    cursor.execute(sql_update_query, inputData)
+    mysql.get_db().commit()
     resp = Response(status=201, mimetype='application/json')
     return resp
+
+
+@app.route('/api/v1/scores/', methods=['POST'])
+def api_add() -> str:
+    content = request.json
+    cursor= mysql.get_db().cursor()
+    inputData= (content['fldLname'], content['fldFname'],content['ssn'],
+                content['test1'],content['test2'],content['test3'],content['test4'],
+                content['final'], request.form.get('grade'))
+    sql_insert_query = """INSERT INTO scoresImport (fldLName,fldFName,ssn,test1,test2,test3,test4,final,grade) VALUES (%s, %s,%s, %s,%s, %s,%s,%s, %s) """
+    cursor.execute(sql_insert_query, inputData)
+    mysql.get_db().commit()
+    resp = Response( status=201, mimetype='application/json')
+    return resp
+
+
+# def api_add() -> str:
+#     resp = Response(status=201, mimetype='application/json')
+#     return resp
 
 
 @app.route('/api/v1/scores/<int:sc_id>', methods=['DELETE'])
